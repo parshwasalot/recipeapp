@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">recipeapp</string>
+    <string name="filter">Filter</string>
+    <string-array name="unit_entries">
+        <item>Metric (grams, liters)</item>
+        <item>Imperial (ounces, cups)</item>
+        <item>US Customary (pounds, cups)</item>
+    </string-array>
+
+    <string-array name="unit_values">
+        <item>metric</item>
+        <item>imperial</item>
+        <item>us_customary</item>
+    </string-array>
+</resources>
