@@ -92,6 +92,7 @@ public class SignupActivity extends AppCompatActivity {
         Map<String, Object> user = new HashMap<>();
         user.put("username", username);
         user.put("email", email);
+        user.put("userType", "user"); // Default user type
         user.put("createdAt", com.google.firebase.Timestamp.now());
 
         // Add a new document with the UID as the document ID

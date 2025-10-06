@@ -63,6 +63,22 @@
             android:name=".NearbyGroceriesActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".ManageRecipesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".CreateRecipeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".UpdateRecipeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".FavoritesActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

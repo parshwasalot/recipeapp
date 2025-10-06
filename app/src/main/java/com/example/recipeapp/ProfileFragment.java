@@ -25,6 +25,7 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private TextView usernameTextView, emailTextView;
+    private Button manageRecipesButton;
     private static final String TAG = "ProfileFragment";
 
     @Nullable
@@ -38,10 +39,22 @@ public class ProfileFragment extends Fragment {
         usernameTextView = view.findViewById(R.id.profile_username);
         emailTextView = view.findViewById(R.id.profile_email);
         Button logoutButton = view.findViewById(R.id.logout_button);
+        Button viewFavoritesButton = view.findViewById(R.id.view_favorites_button);
+        manageRecipesButton = view.findViewById(R.id.manage_recipes_button);
 
         loadUserProfile();
 
         logoutButton.setOnClickListener(v -> logoutUser());
+        
+        viewFavoritesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), FavoritesActivity.class);
+            startActivity(intent);
+        });
+        
+        manageRecipesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ManageRecipesActivity.class);
+            startActivity(intent);
+        });
 
         return view;
     }
@@ -59,13 +72,23 @@ public class ProfileFragment extends Fragment {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         usernameTextView.setText("Username: " + document.getString("username"));
                         emailTextView.setText("Email: " + document.getString("email"));
+                        
+                        // Check if user is admin
+                        String userType = document.getString("userType");
+                        if ("admin".equals(userType)) {
+                            manageRecipesButton.setVisibility(View.VISIBLE);
+                        } else {
+                            manageRecipesButton.setVisibility(View.GONE);
+                        }
                     } else {
                         Log.d(TAG, "No such document");
                         emailTextView.setText("Email: " + user.getEmail());
+                        manageRecipesButton.setVisibility(View.GONE);
                     }
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());
                     Toast.makeText(getContext(), "Failed to load profile.", Toast.LENGTH_SHORT).show();
+                    manageRecipesButton.setVisibility(View.GONE);
                 }
             });
         }

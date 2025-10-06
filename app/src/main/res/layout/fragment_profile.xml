@@ -31,6 +31,24 @@
         android:layout_marginBottom="32dp"/>
 
     <Button
+        android:id="@+id/view_favorites_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Favorites"
+        android:layout_marginBottom="16dp"
+        android:drawableLeft="@android:drawable/btn_star_big_on"
+        android:drawablePadding="8dp"/>
+
+    <Button
+        android:id="@+id/manage_recipes_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manage Recipes (Admin)"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@android:color/holo_orange_dark"/>
+
+    <Button
         android:id="@+id/logout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
@@ -41,7 +43,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         Recipe recipe = recipes.get(position);
         holder.titleTextView.setText(recipe.getTitle());
         holder.descriptionTextView.setText(recipe.getDescription());
-        holder.imageView.setImageResource(recipe.getImageResId());
+        
+        // Load image: Check if it's a Firestore recipe (with URL) or local recipe (with drawable)
+        if (recipe.isFirestoreRecipe()) {
+            // Load image from URL using Glide
+            Glide.with(context)
+                    .load(recipe.getImageUrl())
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .into(holder.imageView);
+        } else {
+            // Load local drawable resource
+            holder.imageView.setImageResource(recipe.getImageResId());
+        }
 
         // Set the click listener
         holder.itemView.setOnClickListener(v -> listener.onRecipeClick(recipe));
